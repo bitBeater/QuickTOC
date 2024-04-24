@@ -1,5 +1,5 @@
 # QuickTOC for Obsidian
-![2024-04-24 19-26.gif…](Uploading Peek 2024-04-24 19-26.gif)
+![Peek 2024-04-24 19-26](https://github.com/bitBeater/QuickTOC/assets/36459323/d927ab7c-94c1-42d0-acfd-f4182bed2443)
 
 ## Introduction
 
