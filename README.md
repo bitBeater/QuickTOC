@@ -1,213 +1,61 @@
-# Obsidian Plugin Template
+# QuickTOC for Obsidian
 
 ## Introduction
 
-This project is a template for creating plugins for Obsidian, a popular
-note-taking and knowledge management application. It includes scripts for
-building, deploying, and managing the plugin lifecycle.
-
-[Obsidian plugin development guide](https://docs.obsidian.md/Plugins/Getting+started/Build+a+plugin)
+QuickTOC is a plugin for Obsidian that automatically generates a table of
+contents (TOC) at the beginning of your notes. The TOC is dynamically linked to
+the headers within the note, allowing for easy navigation and organization of
+your information.
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [Dependencies](#dependencies)
-  - [Deno](#deno)
 - [Usage](#usage)
 - [Features](#features)
+- [Dependencies](#dependencies)
 - [Configuration](#configuration)
-  - [Setting the Obsidian Plugin Directory (for local deploy)](#setting-the-obsidian-plugin-directory)
-  - [Setting the package.json File](#setting-the-packagejson-file)
-- [Building the Plugin](#building-the-plugin)
-- [Deploying the Plugin](#deploying-the-plugin)
-- [Manifest generation](#manifest-generation)
-  - [Customize Manifest generation](#customize-manifest-generation)
-- [Troubleshooting](#troubleshooting)
+- [Documentation](#documentation)
 - [Contributors](#contributors)
 - [License](#license)
 
 ## Installation
 
-To use this template, clone the repository to your local machine:
+To install QuickTOC, follow these steps:
 
-```bash
-gh repo create [REPO_NAME] --template=bitBeater/obsidian_plugin_template
-```
-
-## Dependencies
-
-### Deno
-
-To run the scripts, you need to have **Deno** installed on your machine. You can
-install Deno using the following command:
-
-```bash
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-[or chose another installation method](https://docs.deno.com/runtime/manual/getting_started/installation)
+1. Open Obsidian.
+2. Go to `Settings` > `Community Plugins`.
+3. Disable `Safe Mode`.
+4. Click on `Browse` and search for "QuickTOC".
+5. Install the plugin and enable it.
 
 ## Usage
 
-This template is designed to streamline the development of Obsidian plugins. Use
-the provided scripts to build and deploy your plugin.
+To use QuickTOC, simply open a note and activate the plugin via the command
+palette:
+
+1. Press `Ctrl+P` (or `Cmd+P` on Mac) to open the command palette.
+2. Type "Generate TOC" and select the command.
+3. A table of contents will be generated at the top of your note, linking to all
+   detected headers.
 
 ## Features
 
-- **Build Script**: Bundles the plugin, generates the manifest file, and outputs
-  the JavaScript bundle and assets to the `dist` directory.
-- **Deploy Script**: Builds the plugin and copies the content of the `dist`
-  directory to the specified Obsidian plugins directory.
-- **Manifest Creation Script**: Automatically generates the `manifest.json` file
-  required for Obsidian plugins from the `package.json` file.
+- **Automatic TOC Generation**: Generates a table of contents at the beginning
+  of the note.
+- **Dynamic Links**: Each item in the TOC links directly to the corresponding
+  header in the note.
+- **Easy Navigation**: Enhances the ability to navigate large notes efficiently.
+
+## Dependencies
+
+QuickTOC requires Obsidian v0.12.0 or newer.
 
 ## Configuration
 
-### Setting the Obsidian Plugin Directory
+No additional configuration is required to start using QuickTOC after
+installation.
 
-Configure the deployment directory in the `.env` file:
+## License
 
-```sh
-VAULT_DIR="<path to your vault>";
-```
-
-### Setting the package.json File
-
-You have to confugure the `package.json`.<br/>Default configuration is as
-follows:
-
-```jsonc
-{
-  "name": null,
-  "version": null,
-  "description": null,
-  "license": null,
-  "author": {
-    "name": null,
-    "email": null,
-    "url": null
-  },
-  "manifest": {
-    "minAppVersion": null,
-    "isDesktopOnly": null
-  }
-  //...
-}
-```
-
-## Building the Plugin
-
-To build the plugin, run:
-
-```bash
-npm run build
-```
-
-## Deploying the Plugin
-
-Before deploying, ensure the `VAULT_DIR` in `.env` is set to your Obsidian
-vault.<br/>To deploy the plugin, run:
-
-```bash
-npm run deploy
-```
-
-## Manifest generation
-
-The manifest file is crucial for Obsidian to recognize and use the plugin. It is
-generated from the `package.json` file.<br/>Here is the mapping between:
-
-```json
-{
-  "id": "packageJson.author + packageJson.name",
-  "minAppVersion": "packageJson.manifest.minAppVersion",
-  "isDesktopOnly": "packageJson.manifest.isDesktopOnly",
-  "name": "packageJson.name",
-  "version": "packageJson.version",
-  "description": "packageJson.description",
-  "author": "packageJson.author.name",
-  "authorUrl": "packageJson.author?.url",
-  "fundingUrl": "packageJson.funding.url"
-}
-```
-
-example:
-
-```jsonc
-// package.json
-{
-  "name": "My Plugin",
-  "version": "1.0.0",
-  "description": "Obsidian plugin description",
-  "author": {
-    "name": "John Doe",
-    "url": "https://johndoe.com"
-  },
-  "funding": {
-    "url": "https://jonhdoe.com/give-me-money"
-  },
-  "manifest": {
-    "minAppVersion": "0.12.0",
-    "isDesktopOnly": true
-  }
-}
-
-
-
-// manifest.json
-{
-  "id": "John_Doe@My_Plugin",
-  "name": "My Plugin",
-  "version": "0.0.12",
-  "description": "Obsidian plugin description",
-  "author": "John Doe",
-  "authorUrl": "https://johndoe.com",
-  "fundingUrl": "https://jonhdoe.com/give-me-money",
-  "minAppVersion": "0.12.0",
-  "isDesktopOnly": true
-}
-```
-
----
-
-### Customize Manifest generation
-
-if a manifest field is set in the `package.json`'s `manifest` section, it will
-overwrite the generated value.<br/> For example if you want to set a custom
-`manifest` `id` field:
-
-```jsonc
-// package.json
-{
-  "name": "My Plugin",
-  "version": "1.0.0",
-  "description": "Obsidian plugin description",
-  "author": {
-    "name": "John Doe",
-    "url": "https://johndoe.com"
-  },
-  "funding": {
-    "url": "https://jonhdoe.com/give-me-money"
-  },
-  "manifest": {
-    "id": "pluginId",
-    "minAppVersion": "0.12.0",
-    "isDesktopOnly": true
-  }
-}
-
-
-
-// manifest.json
-{
-  "id": "pluginId",
-  "name": "My Plugin",
-  "version": "0.0.12",
-  "description": "Obsidian plugin description",
-  "author": "John Doe",
-  "authorUrl": "https://johndoe.com",
-  "fundingUrl": "https://jonhdoe.com/give-me-money",
-  "minAppVersion": "0.12.0",
-  "isDesktopOnly": true
-}
-```
+QuickTOC is released under the GPL-3.0 License. See the LICENSE file in the
+repository for more details.

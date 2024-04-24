@@ -1,6 +1,7 @@
 {
   "deno.enable": false,
   "deno.enablePaths": [
-    "./scripts"
+    "./scripts",
+    "./exp"
   ]
 }

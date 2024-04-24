@@ -1,4 +1,5 @@
-import { Plugin } from 'obsidian';
+import { Editor, Plugin } from 'obsidian';
+import { setToc } from './services/set_toc';
 
 
 /****************************************************
@@ -8,12 +9,15 @@ import { Plugin } from 'obsidian';
 
 
 
-export default class MyPlugin extends Plugin {
+export default class QuickTOC extends Plugin {
 
 	async onload() {
-	}
-
-	onunload() {
+		this.addCommand({
+			id: 'generate_toc',
+			name: 'Generate TOC',
+			editorCallback: (editor: Editor) => {
+				setToc(editor);
+			},
+		});
 	}
 }
-

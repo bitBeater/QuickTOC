@@ -1,17 +1,31 @@
 {
-  "name": null,
-  "version": null,
-  "description": null,
-  "license": null,
+  "name": "QuickTOC",
+  "version": "0.0.1",
+  "description": "Automatically generates a table of contents, for your Obsidian notes.",
+  "license": "GPL-3.0-only",
   "author": {
-    "name": null,
-    "email": null,
-    "url": null
+    "name": "bitBeater",
+    "url": "https://github.com/bitBeater"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitBeater/QuickTOC"
   },
   "manifest": {
-    "minAppVersion": null,
-    "isDesktopOnly": null
+    "minAppVersion": "0.12.0",
+    "isDesktopOnly": false
   },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "http://example.com/donate"
+    },
+    "http://example.com/donateAlso",
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/my-account"
+    }
+  ],
   "main": "dist/main.js",
   "scripts": {
     "dev": "scripts/build.ts",
