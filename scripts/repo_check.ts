@@ -11,23 +11,35 @@ type GitFileStatus = 'not_added' | 'staged' | 'modified' | 'deleted';
 const git: SimpleGit = simpleGit();
 
 
-async function doGitAction(fileStatus: GitFileStatus, action: GitAction) {
+async function interactiveGitAction(fileStatus: GitFileStatus, action: GitAction) {
     const files = (await git.status())[fileStatus];
     if (!files.length) return;
     const selectedFiles = await Checkbox.prompt({ message: `unchek the files not to ${action}`, options: files.map(f => ({ value: f, name: fileStatus + " " + f, checked: true })) }) as unknown as string[];
 
     if (!selectedFiles.length) return;
 
-    await git[action](selectedFiles);
+
+    const message = `${action} ${fileStatus}`;
+
+
+    switch (action) {
+        case 'add':
+            await git.add(selectedFiles);
+            break;
+        case 'commit':
+            await git.commit(message, selectedFiles);
+            break;
+    }
 }
 //--------------------------------------------------------------------
 
 
+$$`git push`;
 
 
-await doGitAction('not_added', 'add');
-await doGitAction('staged', 'commit');
-await doGitAction('modified', 'commit');
-await doGitAction('deleted', 'commit');
+await interactiveGitAction('not_added', 'add');
+await interactiveGitAction('staged', 'commit');
+await interactiveGitAction('modified', 'commit');
+await interactiveGitAction('deleted', 'commit');
 
 $$`git push`;
